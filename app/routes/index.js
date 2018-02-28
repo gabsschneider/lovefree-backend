@@ -37,7 +37,7 @@ router.post('/create_user_payment_subscribe', (req, res) => {
 				planId: req.planId
 
 			}, (subErr, subResult) => {
-				if(subResult.sucess) {
+				if(subResult.success) {
 					res.status(200).send({
 						customerId: customerId,
 						subscriptionResult: subResult
