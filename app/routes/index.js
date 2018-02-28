@@ -29,6 +29,7 @@ router.post('/create_user_payment_subscribe', (req, res) => {
 
 	}, (err, result) => {
 		if(result.success) {
+			console.log('user created succesfully')
 			const customerId = result.customer.id;
 	    	const paymentToken = result.customer.paymentMethods[0].token;
 
@@ -38,19 +39,23 @@ router.post('/create_user_payment_subscribe', (req, res) => {
 
 			}, (subErr, subResult) => {
 				if(subResult.success) {
-					res.status(200).send({
+					console.log('user subscribed succesfully')
+
+					res.send({
 						customerId: customerId,
 						subscriptionResult: subResult
 					})
 				}
 
 				transactionErrors = subResult.errors.deepErrors()
+	    		console.log('error subscribing user: ' + transactionErrors)
 				res.status(500).send(transactionErrors)
 
 			})
 		}
 
 	    transactionErrors = result.errors.deepErrors()
+	    console.log('error creating user: ' + transactionErrors)
 		res.status(500).send(transactionErrors)
 
 	});
