@@ -36,4 +36,6 @@ app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
   res.send(err);
 });
 
-app.listen(port)
+app.listen(port, function() {
+    console.log("App is running on port " + port);
+});
